@@ -3,9 +3,9 @@ namespace Holism.Logs.Models
     public enum Type
     {
         Unknwon = 0,
-        success = 1,
-        info = 2,
-        warning = 3,
-        error = 4
+        Success = 1,
+        Info = 2,
+        Warning = 3,
+        Error = 4
     }
 }

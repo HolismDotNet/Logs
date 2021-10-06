@@ -6,19 +6,19 @@
             "isEnum": true,
             "enumItems": [
                 {
-                    "key": "success",
+                    "key": "Success",
                     "value": 1
                 },
                 {
-                    "key": "info",
+                    "key": "Info",
                     "value": 2
                 },
                 {
-                    "key": "warning",
+                    "key": "Warning",
                     "value": 3
                 },
                 {
-                    "key": "error",
+                    "key": "Error",
                     "value": 4
                 }
             ]
