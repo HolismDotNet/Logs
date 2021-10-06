@@ -16,7 +16,14 @@ namespace Holism.Logs.Business
         {
             var log = new Log();
             log.Date = System.DateTime.Now;
-            log.Text = @object.Serialize();
+            if (@object.GetType().Name == "String")
+            {
+                log.Text = (string)@object;
+            }
+            else 
+            {
+                log.Text = @object.Serialize();
+            }
             log.TypeId = (int)GetType(messageType);
             new LogBusiness().Create(log);
         }
