@@ -1,8 +1,8 @@
-﻿using Holism.Business;
+﻿using Holism.Infra;
+using Holism.Business;
 using Holism.DataAccess;
 using Holism.Logs.DataAccess;
 using Holism.Logs.Models;
-using System;
 
 namespace Holism.Logs.Business
 {
@@ -11,5 +11,20 @@ namespace Holism.Logs.Business
         protected override Repository<Log> WriteRepository => Repository.Log;
 
         protected override ReadRepository<Log> ReadRepository => Repository.Log;
+
+        public static void Persist(dynamic @object, MessageType messageType)
+        {
+            var log = new Log();
+            log.Date = System.DateTime.Now;
+            log.Text = @object.Serialize();
+            log.TypeId = (int)GetType(messageType);
+            new LogBusiness().Create(log);
+        }
+
+        private static Type GetType(MessageType messageType)
+        {
+            var type = messageType.ToString().ToEnum<Type>();
+            return type;
+        }
     }
 }
