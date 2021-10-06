@@ -1,0 +1,58 @@
+{
+    "name": "Logs",
+    "tables":[
+        {
+            "name": "Types",
+            "isEnum": true,
+            "enumItems": [
+                {
+                    "key": "success",
+                    "value": 1
+                },
+                {
+                    "key": "info",
+                    "value": 2
+                },
+                {
+                    "key": "warning",
+                    "value": 3
+                },
+                {
+                    "key": "error",
+                    "value": 4
+                }
+            ]
+        },
+        {
+            "name": "Logs",
+            "columns": [
+                {
+                    "name": "Date"
+                },
+                {
+                    "name": "Text",
+                    "type": "longText"
+                },
+                {
+                    "name": "TypeId"
+                }
+            ]
+        }
+    ],
+    "views": [
+        {
+            "name": "LogViews",
+            "query": [
+                "select ",
+                "   Logs.Id,",
+                "   Logs.[Date],",
+                "   Logs.[Text],",
+                "   Logs.TypeId,",
+                "   Types.[Key] as TypeKey",
+                "from Logs",
+                "inner join Types",
+                "on Logs.TypeId = Types.Id"
+            ]
+        }
+    ]
+}
