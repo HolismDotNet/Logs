@@ -39,5 +39,10 @@ namespace Holism.Logs.Business
             var type = messageType.ToString().ToEnum<Holism.Logs.Models.Type>();
             return type;
         }
+
+        public void Empty()
+        {
+            WriteRepository.Run("truncate table Logs");
+        }
     }
 }
