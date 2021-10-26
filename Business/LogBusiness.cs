@@ -44,5 +44,14 @@ namespace Holism.Logs.Business
         {
             WriteRepository.Run("truncate table Logs");
         }
+
+        public void CreateTestLogs()
+        {
+            Logger.LogSuccess("This is a test log for success");
+            Logger.LogInfo("This is a test log for info");
+            Logger.LogWarning("This is a test log for warning");
+            Logger.LogError("This is a test log for error");
+            throw new ServerException("This is a test exception for testing logs");
+        }
     }
 }
