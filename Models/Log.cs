@@ -11,7 +11,7 @@ namespace Holism.Logs.Models
 
         public long Id { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime UtcDate { get; set; }
 
         public string Text { get; set; }
 
