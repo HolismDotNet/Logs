@@ -1,22 +1,19 @@
-using System;
+namespace Holism.Logs.Models;
 
-namespace Holism.Logs.Models
+public class Log : IEntity
 {
-    public class Log : Holism.Models.IEntity
+    public Log()
     {
-        public Log()
-        {
-            RelatedItems = new System.Dynamic.ExpandoObject();
-        }
-
-        public long Id { get; set; }
-
-        public DateTime UtcDate { get; set; }
-
-        public string Text { get; set; }
-
-        public long TypeId { get; set; }
-
-        public dynamic RelatedItems { get; set; }
+        RelatedItems = new ExpandoObject();
     }
+
+    public long Id { get; set; }
+
+    public DateTime UtcDate { get; set; }
+
+    public string Text { get; set; }
+
+    public long TypeId { get; set; }
+
+    public dynamic RelatedItems { get; set; }
 }

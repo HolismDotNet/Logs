@@ -1,26 +1,20 @@
-using Holism.Logs.Models;
-using Holism.DataAccess;
+namespace Holism.Logs.DataAccess;
 
-namespace Holism.Logs.DataAccess
+public class Repository
 {
-    public class Repository
+    public static Repository<Log> Log
     {
-        public static Repository<Log> Log
+        get
         {
-            get
-            {
-                return new Holism.DataAccess.Repository<Log
-                >(new LogsContext());
-            }
+            return new Repository<Log>(new LogsContext());
         }
+    }
 
-        public static Repository<LogView> LogView
+    public static Repository<LogView> LogView
+    {
+        get
         {
-            get
-            {
-                return new Holism.DataAccess.Repository<LogView
-                >(new LogsContext());
-            }
+            return new Repository<LogView>(new LogsContext());
         }
     }
 }
