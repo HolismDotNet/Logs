@@ -4,7 +4,7 @@ using Holism.Logs.Business;
 using Holism.Logs.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Holism.AdminApi.Api.Controllers
+namespace Holism.AdminApi.Controllers
 {
     public class LogController : Controller<LogView, Log>
     {
