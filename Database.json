@@ -45,10 +45,10 @@
             "query": [
                 "select ",
                 "   Logs.Id,",
-                "   Logs.[Date],",
-                "   Logs.[Text],",
+                "   Logs.`Date`,",
+                "   Logs.`Text`,",
                 "   Logs.TypeId,",
-                "   Types.[Key] as TypeKey",
+                "   Types.`Key` as TypeKey",
                 "from Logs",
                 "inner join Types",
                 "on Logs.TypeId = Types.Id"
