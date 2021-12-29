@@ -15,8 +15,11 @@ namespace Holism.Logs.Business
 
         protected override ReadRepository<LogView> ReadRepository => Repository.LogView;
 
-        protected override Expression<Func<LogView, object>>
-        DefaultDescendingSortProperty => i => i.Id;
+        protected override Func<Sort> DefaultSort => () => new Sort
+        {
+            Property = nameof(Log.Id),
+            Direction = SortDirection.Descending
+        };
 
         public static void Persist(dynamic @object, MessageType messageType)
         {
