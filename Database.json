@@ -43,7 +43,7 @@
         {
             "name": "LogViews",
             "query": [
-                "select ",
+                "select",
                 "   Logs.Id,",
                 "   Logs.`Date`,",
                 "   Logs.`Text`,",
