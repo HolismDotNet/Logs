@@ -24,7 +24,7 @@ namespace Holism.Logs.Business
         public static void Persist(dynamic @object, MessageType messageType)
         {
             var log = new Log();
-            log.UtcDate = DateTime.Now.ToUniversalTime();
+            log.UtcDate = UniversalDateTime.Now;
             if (@object.GetType().Name == "String")
             {
                 log.Text = (string)@object;
