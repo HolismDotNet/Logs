@@ -1,6 +1,6 @@
 namespace Holism.Logs.Models
 {
-    public enum Type
+    public enum LogType
     {
         Unknwon = 0,
         Success = 1,

@@ -2,7 +2,7 @@
     "name": "Logs",
     "tables":[
         {
-            "name": "Types",
+            "name": "LogTypes",
             "isEnum": true,
             "enumItems": [
                 {
@@ -44,14 +44,14 @@
             "name": "LogViews",
             "query": [
                 "select",
-                "   Logs.Id,",
-                "   Logs.`Date`,",
-                "   Logs.`Text`,",
-                "   Logs.TypeId,",
-                "   Types.`Key` as TypeKey",
-                "from Logs",
-                "inner join Types",
-                "on Logs.TypeId = Types.Id"
+                "   l.Id,",
+                "   l.`Date`,",
+                "   l.`Text`,",
+                "   l.TypeId,",
+                "   lt.`Key` as TypeKey",
+                "from Logs l",
+                "inner join LogTypes lt",
+                "on l.TypeId = lt.Id"
             ]
         }
     ]

@@ -37,9 +37,9 @@ namespace Holism.Logs.Business
             new LogBusiness().Create(log);
         }
 
-        private static Holism.Logs.Models.Type GetType(MessageType messageType)
+        private static LogType GetType(MessageType messageType)
         {
-            var type = messageType.ToString().ToEnum<Holism.Logs.Models.Type>();
+            var type = messageType.ToString().ToEnum<LogType>();
             return type;
         }
 
