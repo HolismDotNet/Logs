@@ -13,7 +13,7 @@ public class Log : IEntity
 
     public string Text { get; set; }
 
-    public long TypeId { get; set; }
+    public long LogTypeId { get; set; }
 
     public dynamic RelatedItems { get; set; }
 }

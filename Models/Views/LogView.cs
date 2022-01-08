@@ -13,7 +13,7 @@ public class LogView : IEntity
 
     public string Text { get; set; }
 
-    public long TypeId { get; set; }
+    public long LogTypeId { get; set; }
 
     public string TypeKey { get; set; }
 

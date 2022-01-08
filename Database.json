@@ -47,11 +47,11 @@
                 "   l.Id,",
                 "   l.`Date`,",
                 "   l.`Text`,",
-                "   l.TypeId,",
+                "   l.LogTypeId,",
                 "   lt.`Key` as TypeKey",
                 "from Logs l",
                 "inner join LogTypes lt",
-                "on l.TypeId = lt.Id"
+                "on l.LogTypeId = lt.Id"
             ]
         }
     ]
