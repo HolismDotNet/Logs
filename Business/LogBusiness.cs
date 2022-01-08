@@ -33,7 +33,7 @@ namespace Holism.Logs.Business
             {
                 log.Text = @object.Serialize();
             }
-            log.TypeId = (int)GetType(messageType);
+            log.LogTypeId = (int)GetType(messageType);
             new LogBusiness().Create(log);
         }
 
