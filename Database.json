@@ -34,7 +34,7 @@
                     "type": "longText"
                 },
                 {
-                    "name": "TypeId"
+                    "name": "LogTypeId"
                 }
             ]
         }
