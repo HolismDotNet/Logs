@@ -15,6 +15,8 @@ namespace Holism.Logs.Business
 
         protected override ReadRepository<LogView> ReadRepository => Repository.LogView;
 
+        public static bool LogTypesInitialDataExists = false;
+
         protected override Func<Sort> DefaultSort => () => new Sort
         {
             Property = nameof(Log.Id),
@@ -23,24 +25,40 @@ namespace Holism.Logs.Business
 
         public static void Persist(dynamic @object, MessageType messageType)
         {
-            var log = new Log();
-            log.UtcDate = UniversalDateTime.Now;
-            if (@object.GetType().Name == "String")
+            if (!LogTypesInitialDataExists)
             {
-                log.Text = (string)@object;
+                CheckExistenceOfLogTypes();
             }
-            else 
+            if (LogTypesInitialDataExists)
             {
-                log.Text = @object.Serialize();
+                var log = new Log();
+                log.UtcDate = UniversalDateTime.Now;
+                if (@object.GetType().Name == "String")
+                {
+                    log.Text = (string)@object;
+                }
+                else 
+                {
+                    log.Text = @object.Serialize();
+                }
+                log.LogTypeId = (int)GetType(messageType);
+                new LogBusiness().Create(log);
             }
-            log.LogTypeId = (int)GetType(messageType);
-            new LogBusiness().Create(log);
         }
 
         private static LogType GetType(MessageType messageType)
         {
             var type = messageType.ToString().ToEnum<LogType>();
             return type;
+        }
+
+        protected static void CheckExistenceOfLogTypes()
+        {
+            var logTypes = new LogTypeBusiness().GetAll();
+            if (logTypes.Count > 0)
+            {
+                LogTypesInitialDataExists = true;
+            }
         }
 
         public void Empty()
