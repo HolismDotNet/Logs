@@ -1,9 +1,6 @@
+namespace Logs;
 
-
-
-namespace Holism.Logs.Business;
-
-public class LogTypeBusiness : EnumBusiness<LogType>
+public class TypeBusiness : EnumBusiness<Logs.Type>
 {
     public override string ConnectionString => Repository.Log.ConnectionString;
 }

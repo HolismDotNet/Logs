@@ -1,4 +1,4 @@
-namespace Holism.AdminApi.Controllers;
+namespace Logs;
 
 public class LogController : Controller<LogView, Log>
 {

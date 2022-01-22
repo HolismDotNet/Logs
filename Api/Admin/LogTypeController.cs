@@ -1,6 +1,6 @@
-namespace Holism.Logs.AdminApi;
+namespace Logs;
 
-public class LogTypeController : EnumController<LogType>
+public class LogTypeController : EnumController<Logs.Type>
 {
-    public override EnumBusiness<LogType> EnumBusiness => new LogTypeBusiness();
+    public override EnumBusiness<Logs.Type> EnumBusiness => new Logs.TypeBusiness();
 }

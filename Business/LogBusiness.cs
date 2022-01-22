@@ -1,78 +1,68 @@
-﻿using System;
-using System.Linq.Expressions;
-using Holism.Business;
-using Holism.DataAccess;
-using Holism.Infra;
-using Holism.Logs.DataAccess;
-using Holism.Logs.Models;
-using Humanizer;
+﻿namespace Logs;
 
-namespace Holism.Logs.Business
+public class LogBusiness : Business<LogView, Log>
 {
-    public class LogBusiness : Business<LogView, Log>
+    protected override Repository<Log> WriteRepository => Repository.Log;
+
+    protected override ReadRepository<LogView> ReadRepository => Repository.LogView;
+
+    public static bool TypesInitialDataExists = false;
+
+    protected override Func<Sort> DefaultSort => () => new Sort
     {
-        protected override Repository<Log> WriteRepository => Repository.Log;
+        Property = nameof(Log.Id),
+        Direction = SortDirection.Descending
+    };
 
-        protected override ReadRepository<LogView> ReadRepository => Repository.LogView;
-
-        public static bool LogTypesInitialDataExists = false;
-
-        protected override Func<Sort> DefaultSort => () => new Sort
+    public static void Persist(dynamic @object, MessageType messageType)
+    {
+        if (!TypesInitialDataExists)
         {
-            Property = nameof(Log.Id),
-            Direction = SortDirection.Descending
-        };
-
-        public static void Persist(dynamic @object, MessageType messageType)
+            CheckExistenceOfLogTypes();
+        }
+        if (TypesInitialDataExists)
         {
-            if (!LogTypesInitialDataExists)
+            var log = new Log();
+            log.UtcDate = UniversalDateTime.Now;
+            if (@object.GetType().Name == "String")
             {
-                CheckExistenceOfLogTypes();
+                log.Text = (string)@object;
             }
-            if (LogTypesInitialDataExists)
+            else 
             {
-                var log = new Log();
-                log.UtcDate = UniversalDateTime.Now;
-                if (@object.GetType().Name == "String")
-                {
-                    log.Text = (string)@object;
-                }
-                else 
-                {
-                    log.Text = @object.Serialize();
-                }
-                log.LogTypeId = (int)GetType(messageType);
-                new LogBusiness().Create(log);
+                log.Text = @object.Serialize();
             }
+            log.LogTypeId = (int)GetType(messageType);
+            new LogBusiness().Create(log);
         }
+    }
 
-        private static LogType GetType(MessageType messageType)
-        {
-            var type = messageType.ToString().ToEnum<LogType>();
-            return type;
-        }
+    private static Logs.Type GetType(MessageType messageType)
+    {
+        var type = messageType.ToString().ToEnum<Logs.Type>();
+        return type;
+    }
 
-        protected static void CheckExistenceOfLogTypes()
+    protected static void CheckExistenceOfLogTypes()
+    {
+        var logTypes = new Logs.TypeBusiness().GetAll();
+        if (logTypes.Count > 0)
         {
-            var logTypes = new LogTypeBusiness().GetAll();
-            if (logTypes.Count > 0)
-            {
-                LogTypesInitialDataExists = true;
-            }
+            TypesInitialDataExists = true;
         }
+    }
 
-        public void Empty()
-        {
-            WriteRepository.Run("truncate table Logs");
-        }
+    public void Empty()
+    {
+        WriteRepository.Run("truncate table Logs");
+    }
 
-        public void CreateTestLogs()
-        {
-            Logger.LogSuccess("This is a test log for success");
-            Logger.LogInfo("This is a test log for info");
-            Logger.LogWarning("This is a test log for warning");
-            Logger.LogError("This is a test log for error");
-            throw new ServerException("This is a test exception for testing logs");
-        }
+    public void CreateTestLogs()
+    {
+        Logger.LogSuccess("This is a test log for success");
+        Logger.LogInfo("This is a test log for info");
+        Logger.LogWarning("This is a test log for warning");
+        Logger.LogError("This is a test log for error");
+        throw new ServerException("This is a test exception for testing logs");
     }
 }
