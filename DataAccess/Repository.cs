@@ -1,20 +1,20 @@
-namespace Holism.Logs.DataAccess;
+namespace Logs;
 
 public class Repository
 {
-    public static Repository<Log> Log
+    public static Repository<Logs.Log> Log
     {
         get
         {
-            return new Repository<Log>(new LogsContext());
+            return new Repository<Logs.Log>(new LogsContext());
         }
     }
 
-    public static Repository<LogView> LogView
+    public static Repository<Logs.LogView> LogView
     {
         get
         {
-            return new Repository<LogView>(new LogsContext());
+            return new Repository<Logs.LogView>(new LogsContext());
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace Holism.Logs.DataAccess;
+namespace Logs;
 
 public class LogsContext : DatabaseContext
 {

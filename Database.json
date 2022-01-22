@@ -2,7 +2,7 @@
     "name": "Logs",
     "tables":[
         {
-            "name": "LogTypes",
+            "name": "Types",
             "isEnum": true,
             "enumItems": [
                 {
@@ -34,7 +34,7 @@
                     "type": "longText"
                 },
                 {
-                    "name": "LogTypeId"
+                    "name": "TypeId"
                 }
             ]
         }
@@ -47,11 +47,11 @@
                 "   l.Id,",
                 "   l.`Date`,",
                 "   l.`Text`,",
-                "   l.LogTypeId,",
-                "   lt.`Key` as TypeKey",
+                "   l.TypeId,",
+                "   t.`Key` as TypeKey",
                 "from Logs l",
-                "inner join LogTypes lt",
-                "on l.LogTypeId = lt.Id"
+                "inner join Types t",
+                "on l.TypeId = t.Id"
             ]
         }
     ]
