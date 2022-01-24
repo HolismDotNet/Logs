@@ -32,7 +32,7 @@ public class LogBusiness : Business<LogView, Log>
             {
                 log.Text = @object.Serialize();
             }
-            log.LogTypeId = (int)GetType(messageType);
+            log.TypeId = (int)GetType(messageType);
             new LogBusiness().Create(log);
         }
     }
