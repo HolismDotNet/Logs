@@ -2,19 +2,19 @@ namespace Logs;
 
 public class Repository
 {
-    public static Repository<Logs.Log> Log
+    public static Write<Logs.Log> Log
     {
         get
         {
-            return new Repository<Logs.Log>(new LogsContext());
+            return new Write<Logs.Log>(new LogsContext());
         }
     }
 
-    public static Repository<Logs.LogView> LogView
+    public static Write<Logs.LogView> LogView
     {
         get
         {
-            return new Repository<Logs.LogView>(new LogsContext());
+            return new Write<Logs.LogView>(new LogsContext());
         }
     }
 }

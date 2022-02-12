@@ -2,9 +2,9 @@
 
 public class LogBusiness : Business<LogView, Log>
 {
-    protected override Repository<Log> WriteRepository => Repository.Log;
+    protected override Write<Log> Write => Repository.Log;
 
-    protected override ReadRepository<LogView> ReadRepository => Repository.LogView;
+    protected override Read<LogView> Read => Repository.LogView;
 
     public static bool TypesInitialDataExists = false;
 
@@ -54,7 +54,7 @@ public class LogBusiness : Business<LogView, Log>
 
     public void Empty()
     {
-        WriteRepository.Run("truncate table Logs");
+        Write.Run("truncate table Logs");
     }
 
     public void CreateTestLogs()
