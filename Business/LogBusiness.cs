@@ -28,9 +28,17 @@ public class LogBusiness : Business<LogView, Log>
             {
                 log.Text = (string)@object;
             }
-            else 
+            else
             {
-                log.Text = @object.Serialize();
+                try
+                {
+                    log.Text = @object.Serialize();
+                }
+                catch (Exception ex)
+                {
+                    var message = ExceptionHelper.BuildExceptionString(ex);
+                    log.Text = message; 
+                }
             }
             log.TypeId = (int)GetType(messageType);
             new LogBusiness().Create(log);
