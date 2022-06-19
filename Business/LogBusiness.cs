@@ -73,4 +73,12 @@ public class LogBusiness : Business<LogView, Log>
         Logger.LogError("This is a test log for error");
         throw new ServerException("This is a test exception for testing logs");
     }
+
+    public void DeleteLogs(List<long> logIds)
+    {
+        foreach (var logId in logIds)
+        {
+            Delete(logId);
+        }
+    }
 }
