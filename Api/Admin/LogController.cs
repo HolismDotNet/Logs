@@ -14,6 +14,13 @@ public class LogController : Controller<LogView, Log>
     }
 
     [HttpPost]
+    public IActionResult DeleteLogs(List<long> ids)
+    {
+        new LogBusiness().DeleteLogs(ids);
+        return OkJson();
+    }
+
+    [HttpPost]
     public IActionResult CreateTestLogs()
     {
         new LogBusiness().CreateTestLogs();
